@@ -18,6 +18,18 @@ namespace Application
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Roles",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Roles", action = "Index", id = UrlParameter.Optional }
+            );
+
+            //routes.MapRoute(
+            //    name: "News",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }
