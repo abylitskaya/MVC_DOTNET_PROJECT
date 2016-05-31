@@ -31,5 +31,7 @@ namespace Application.Models
         }
 
         public System.Data.Entity.DbSet<Application.Models.Roles> IdentityRoles { get; set; }
+
+        public System.Data.Entity.DbSet<Application.Models.News> News { get; set; }
     }
 }
