@@ -62,7 +62,7 @@ namespace Application.Controllers
         [System.Web.Http.HttpPost]
         //[ValidateAntiForgeryToken]
         [System.Web.Http.Authorize]
-        public ActionResult Create([Bind(Include = "Id,Title,CreationDate,Content")] News news, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,Title,Content")] News news, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace Application.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [System.Web.Http.HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,CreationDate,Content")] News news)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content")] News news)
         {
             if (ModelState.IsValid)
             {
