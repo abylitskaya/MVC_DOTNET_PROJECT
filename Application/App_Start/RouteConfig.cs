@@ -25,11 +25,11 @@ namespace Application
                 defaults: new { controller = "Roles", action = "Index", id = UrlParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //    name: "News",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
-            //);
+            routes.MapRoute(
+                name: "News",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

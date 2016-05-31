@@ -50,17 +50,17 @@ namespace Application.Controllers
         }
 
         // GET: News/Create
-        [System.Web.Http.Authorize]
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //[System.Web.Http.Authorize]
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
         // POST: News/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [System.Web.Http.HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         [System.Web.Http.Authorize]
         public ActionResult Create([Bind(Include = "Id,Title,CreationDate,Content")] News news, HttpPostedFileBase upload)
         {

@@ -20,12 +20,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Content)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CustomFileName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SavedFileName)
-        </th>
         <th></th>
     </tr>
 
@@ -39,12 +33,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CustomFileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SavedFileName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
