@@ -62,14 +62,14 @@ namespace Application.Controllers
         [System.Web.Http.HttpPost]
         //[ValidateAntiForgeryToken]
         [System.Web.Http.Authorize]
-        public ActionResult Create([Bind(Include = "Id,Title,Content")] News news, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "Id,Title,CreationDate,Content")] News news, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser user = userManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
                 news.CreationDate = DateTime.Now;
-                //news.ApplicationUser = user;
+                news.ApplicationUser = user;
 
                 if (upload != null)
                 {
@@ -108,10 +108,11 @@ namespace Application.Controllers
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [System.Web.Http.HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content")] News news)
+        public ActionResult Edit([Bind(Include = "Id,Title,CreationDate,Content")] News news)
         {
             if (ModelState.IsValid)
             {
+                news.CreationDate = DateTime.Now;
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -137,20 +138,21 @@ namespace Application.Controllers
 
         // POST: News/Delete/5
         [System.Web.Http.HttpPost, System.Web.Http.ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
 
 
             //var selectedNews = db.News.Include(n => n.ApplicationUser).Include(n => n.Tags).Where(n => n.Id == id).Single();
+            var selectedNews = db.News.Include(n => n.ApplicationUser).Where(n => n.Id == id).Single();
 
-            //ApplicationUser currentUser = userManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            ApplicationUser currentUser = userManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-            //if (selectedNews.ApplicationUser.Id != currentUser.Id && !userManager.IsInRole(currentUser.Id, "admin"))
-            //{
-            //    return RedirectToAction("Login", "Account");
-            //}
-            //db.News.Remove(selectedNews);
+            if (selectedNews.ApplicationUser.Id != currentUser.Id && !userManager.IsInRole(currentUser.Id, "admin"))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            db.News.Remove(selectedNews);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
