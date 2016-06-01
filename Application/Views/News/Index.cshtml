@@ -11,9 +11,9 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
+        <th>
             Image
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -28,9 +28,9 @@
 
 @foreach (var item in Model) {
     <tr style="max-width:100%">
-        @*<td>
+        <td>
             <img src="~/Images/@item.Id" alt="no image" width="100" height="100" />
-        </td>*@
+        </td>
         <td style="max-width:150px;">
             @Html.DisplayFor(modelItem => item.Title)
         </td>

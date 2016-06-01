@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Application.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Application.Models
         public ApplicationUser ApplicationUser { get; set; }
 
         public string Content { get; set; }
-        //public List<Tag> Tags { get; set; }
+        public List<Tags> Tags { get; set; }
 
         public string CustomFileName { get; set; }
         public string SavedFileName { get; set; }
