@@ -32,6 +32,12 @@ namespace Application
             );
 
             routes.MapRoute(
+                name: "Tags",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Tags", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Cars",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Cars", action = "Index", id = UrlParameter.Optional }
