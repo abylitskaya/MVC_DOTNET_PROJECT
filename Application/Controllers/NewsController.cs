@@ -2,36 +2,26 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using System.Web.Http.OData;
-using System.Web.Http.OData.Routing;
-using Application.Models;
-using System.Web.Mvc;
 using System.Web;
-using Microsoft.AspNet.Identity.Owin;
+using System.Web.Mvc;
+using Application.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Application.Controllers
 {
     public class NewsController : Controller
     {
-
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserManager userManager = System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationUserManager>();
 
         // GET: News
         public ActionResult Index()
         {
-
-            //return View(db.News.Include(n => n.ApplicationUser).Include(n => n.Tags).OrderByDescending(n => n.CreationDate).ToList());
             return View(db.News.ToList());
-
         }
 
         // GET: News/Details/5
@@ -50,18 +40,16 @@ namespace Application.Controllers
         }
 
         // GET: News/Create
-        //[System.Web.Http.Authorize]
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
+        public ActionResult Create()
+        {
+            return View();
+        }
 
         // POST: News/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
-        [System.Web.Http.HttpPost]
-        //[ValidateAntiForgeryToken]
-        [System.Web.Http.Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Title,CreationDate,Content")] News news, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
@@ -89,25 +77,25 @@ namespace Application.Controllers
         }
 
         // GET: News/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    News news = db.News.Find(id);
-        //    if (news == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(news);
-        //}
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            News news = db.News.Find(id);
+            if (news == null)
+            {
+                return HttpNotFound();
+            }
+            return View(news);
+        }
 
         // POST: News/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
-        [System.Web.Http.HttpPost]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,CreationDate,Content")] News news)
         {
             if (ModelState.IsValid)
@@ -121,7 +109,6 @@ namespace Application.Controllers
         }
 
         // GET: News/Delete/5
-
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -137,22 +124,12 @@ namespace Application.Controllers
         }
 
         // POST: News/Delete/5
-        [System.Web.Http.HttpPost, System.Web.Http.ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-
-
-            //var selectedNews = db.News.Include(n => n.ApplicationUser).Include(n => n.Tags).Where(n => n.Id == id).Single();
-            var selectedNews = db.News.Include(n => n.ApplicationUser).Where(n => n.Id == id).Single();
-
-            ApplicationUser currentUser = userManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
-            if (selectedNews.ApplicationUser.Id != currentUser.Id && !userManager.IsInRole(currentUser.Id, "admin"))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            db.News.Remove(selectedNews);
+            News news = db.News.Find(id);
+            db.News.Remove(news);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
