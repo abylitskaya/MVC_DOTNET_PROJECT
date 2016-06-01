@@ -6,14 +6,14 @@ using System.Web;
 
 namespace Application.Models
 {
-    public class Roles : IdentityRole
+    public class ApplicationRoles : IdentityRole
     {
-        public Roles()
+        public ApplicationRoles()
         {
 
         }
 
-        public string Name { get; set; }
+      
         public string Description { get; set; }
     }
 }

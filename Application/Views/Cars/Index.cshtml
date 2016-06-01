@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Application.Models.News>
+﻿@model IEnumerable<Application.Models.Car>
 
 @{
     ViewBag.Title = "Index";
@@ -11,34 +11,28 @@
 </p>
 <table class="table">
     <tr>
-        @*<th>
-            Фото
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @Html.DisplayNameFor(model => model.Year)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayNameFor(model => model.Model)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        @*<td>
-            <img src="~/Images/@{@item.Id}.jpeg" alt="image @item.Id" width="100" height="100" />
-        </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.Title)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
+            @Html.DisplayFor(modelItem => item.Year)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Content)
+            @Html.DisplayFor(modelItem => item.Model)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

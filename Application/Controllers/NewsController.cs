@@ -69,7 +69,7 @@ namespace Application.Controllers
                 ApplicationUser user = userManager.FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
                 news.CreationDate = DateTime.Now;
-                news.ApplicationUser = user;
+                //news.ApplicationUser = user;
 
                 if (upload != null)
                 {
@@ -89,25 +89,25 @@ namespace Application.Controllers
         }
 
         // GET: News/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            News news = db.News.Find(id);
-            if (news == null)
-            {
-                return HttpNotFound();
-            }
-            return View(news);
-        }
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    News news = db.News.Find(id);
+        //    if (news == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(news);
+        //}
 
         // POST: News/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
         [System.Web.Http.HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Title,Content")] News news)
         {
             if (ModelState.IsValid)

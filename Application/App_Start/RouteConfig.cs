@@ -30,6 +30,12 @@ namespace Application
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Cars",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Cars", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

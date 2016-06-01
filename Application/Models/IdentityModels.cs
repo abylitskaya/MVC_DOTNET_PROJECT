@@ -30,8 +30,10 @@ namespace Application.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Application.Models.Roles> IdentityRoles { get; set; }
+        public System.Data.Entity.DbSet<Application.Models.ApplicationRoles> IdentityRoles { get; set; }
 
         public System.Data.Entity.DbSet<Application.Models.News> News { get; set; }
+
+        public System.Data.Entity.DbSet<Application.Models.Car> Cars { get; set; }
     }
 }
